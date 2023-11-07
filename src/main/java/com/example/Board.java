@@ -29,6 +29,8 @@ public class Board {
     }
   }
 
+  // example of comment
+
   private boolean horizontal(int x, int y)
   {
     int count = 0;
