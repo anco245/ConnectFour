@@ -113,18 +113,47 @@ public class Board {
 
   private boolean rightDiagonal(int x, int y)
   {
+    int startx, starty = 0;
+    int endx, endy = 0;
+    int count = 0;
+
     //for initial starting point for right to left
-    if(x+y < deep)
+    if(x > y)
     {
+      startx = x-y;
+      starty = 0;
 
+      endx = wide - 1;
+      endy = (wide-1)-startx;
+    } else if (x < y) {
+      startx = 0;
+      starty = y-x;
+
+      endx = (deep-1) - starty;
+      endy = deep - 1;
     } else {
+      startx = 0;
+      starty = 0;
 
+      endx = wide - 1;
+      endy = deep - 1;
     }
 
-    //check right to left, top to bottom
-    //for() {}
+    while(startx <= endx)
+    {
+      if (count==4) {
+        return true;
+      } else if (board[startx][starty].equals(Main.currentPlayer)) {
+        count++;
+      } else if (!board[startx][starty].equals(Main.currentPlayer)) {
+        count = 0;
+      }
 
-    return false;
+      startx++;
+      starty--;
+    }
+
+    return count==4;
   }
 
   public boolean hasWinner()
@@ -140,17 +169,11 @@ public class Board {
         return true;
       } else if (leftDiagonal(lastPos.get(0), lastPos.get(1))) {
         return true;
-      } else {
-        return false;
-      }
-
-      /*
-      else if (rightDiagonal(lastPos.get(0), lastPos.get(1))) {
+      } else if (rightDiagonal(lastPos.get(0), lastPos.get(1))) {
         return true;
       } else {
         return false;
       }
-      */
     }
   }
 

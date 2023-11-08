@@ -14,6 +14,7 @@ public class Main {
 
     public static void gameSetUp() {
       System.out.println("How wide do you want the board?");
+
       int wide = scan.nextInt();
 
       System.out.println("How deep do you want the board");
