@@ -14,7 +14,6 @@ public class Main {
 
     public static void gameSetUp() {
       System.out.println("How wide do you want the board?");
-
       int wide = scan.nextInt();
 
       System.out.println("How deep do you want the board");
@@ -34,9 +33,36 @@ public class Main {
       }
     }
 
+    public static void testSetUp1() {
+      b = new Board(5, 6);
+
+      player1 = "x";
+      player2 = "o";
+
+      b.placePiece(2, player1);
+      b.placePiece(3, player2);
+      b.placePiece(3, player1);
+      b.placePiece(4, player2);
+      b.placePiece(5, player1);
+      b.placePiece(4, player2);
+
+      b.printBoard();
+
+      turn = 6;
+    }
+
+    public static void testSetUp2() {
+      b = new Board(5, 6);
+      b.printBoard();
+
+      player1 = "x";
+      player2 = "o";
+    }
+
     public static void main(String[] args) {
 
       gameSetUp();
+      //testSetUp1();
 
       while(!b.hasWinner())
       {

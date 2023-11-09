@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Board {
 
-  int wide;
-  int deep;
+  int altWide;
+  int altDeep;
 
   boolean winner = false;
 
@@ -15,9 +15,6 @@ public class Board {
 
   public Board(int wide, int deep)
   {
-    this.wide = wide;
-    this.deep = deep;
-
     board = new String[wide][deep];
 
     for(int i = 0; i < deep; i++)
@@ -27,15 +24,16 @@ public class Board {
         board[j][i] = "-";
       }
     }
-  }
 
-  // example of comment
+    this.altDeep = deep - 1;
+    this.altWide = wide - 1;
+  }
 
   private boolean horizontal(int x, int y)
   {
     int count = 0;
 
-    for(int i = 0; i < wide; i++)
+    for(int i = 0; i < altWide + 1; i++)
     {
       if(count==3)
       {
@@ -54,7 +52,7 @@ public class Board {
   {
     int count = 0;
 
-    for(int i = 0; i < deep; i++)
+    for(int i = 0; i < altDeep + 1; i++)
     {
       if(count==3)
       {
@@ -75,20 +73,26 @@ public class Board {
     int starty, endy = 0;
 
     //for initial starting point for left to right
-    if(x+y < deep-1)
+    if(x+y < altDeep)
     {
-      starty = x+y;
       startx = 0;
+      starty = x+y;
 
-      endx = wide-1;
-      //endy = (startx + starty) - x;
+      if(y <= altWide)
+      {
+        endx = x+y;
+        endy = 0;
+      } else {
+        endx = altWide;
+        endy = (x+y) - altWide;
+      }
     } else {
-      starty = deep-1;
-      startx = (x+y) - (deep-1);
+      startx = (x+y) - altDeep;
+      starty = altDeep;
 
-      endx = wide-1;
-      endy = (startx + starty) - endx;
-    }
+      endx = altWide;
+      endy = altWide - hold - altDeep;
+     }
 
     int count = 0;
 
@@ -123,20 +127,20 @@ public class Board {
       startx = x-y;
       starty = 0;
 
-      endx = wide - 1;
-      endy = (wide-1)-startx;
+      endx = altWide;
+      endy = altWide - startx;
     } else if (x < y) {
       startx = 0;
       starty = y-x;
 
-      endx = (deep-1) - starty;
-      endy = deep - 1;
+      endx = altDeep - starty;
+      endy = altDeep;
     } else {
       startx = 0;
       starty = 0;
 
-      endx = wide - 1;
-      endy = deep - 1;
+      endx = altWide;
+      endy = altWide;
     }
 
     while(startx <= endx)
@@ -150,7 +154,7 @@ public class Board {
       }
 
       startx++;
-      starty--;
+      starty++;
     }
 
     return count==4;
@@ -180,23 +184,23 @@ public class Board {
   public void placePiece(int col, String player)
   {
     //make sure that adding another to column doesn't cause out of bounds error
-    int alteredDeep = deep - 1;
+    int deepPosition = altDeep;
 
     /*
      * In connect four, to place a piece, a piece is dropped
      * from the top of the board. The piece then settles where ever there's
      * the first empty space in that column
      */
-    while(!board[col-1][alteredDeep].equals("-"))
+    while(!board[col-1][deepPosition].equals("-"))
     {
-      alteredDeep--;
+      deepPosition--;
     }
 
-    board[col-1][alteredDeep] = player;
+    board[col-1][deepPosition] = player;
 
     lastPos.clear();
     lastPos.add(col-1);
-    lastPos.add(alteredDeep);
+    lastPos.add(deepPosition);
   }
 
   public void printBoard()
@@ -204,11 +208,11 @@ public class Board {
     //println statements at the beginning and end are just for aesthetics
     System.out.println();
 
-    for(int i = 0; i < deep; i++)
+    for(int i = 0; i < altdeep + 1; i++)
     {
-      for(int j = 0; j < wide; j++)
+      for(int j = 0; j < altwide + 1; j++)
       {
-        if(j == wide - 1)
+        if(j == altWide)
         {
           System.out.print(board[j][i] + "\n");
         } else {
