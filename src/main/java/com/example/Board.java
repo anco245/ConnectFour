@@ -165,20 +165,24 @@ public class Board {
     if(Main.turn < 7)
     {
       return false;
-    } else {
-      if(horizontal(lastPos.get(0), lastPos.get(1)))
-      {
-        return true;
-      } else if (vertical(lastPos.get(0), lastPos.get(1))) {
-        return true;
-      } else if (leftDiagonal(lastPos.get(0), lastPos.get(1))) {
+    }
+
+    if (Main.turn > 10) {
+      if (leftDiagonal(lastPos.get(0), lastPos.get(1))) {
         return true;
       } else if (rightDiagonal(lastPos.get(0), lastPos.get(1))) {
         return true;
-      } else {
-        return false;
       }
     }
+
+    if(horizontal(lastPos.get(0), lastPos.get(1)))
+    {
+      return true;
+    } else if (vertical(lastPos.get(0), lastPos.get(1))) {
+      return true;
+    }
+
+    return false;
   }
 
   public void placePiece(int col, String player)
