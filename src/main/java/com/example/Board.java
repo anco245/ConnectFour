@@ -91,7 +91,8 @@ public class Board {
       starty = altDeep;
 
       endx = altWide;
-      endy = altWide - hold - altDeep;
+      //endy = altWide - hold - altDeep;
+      endy = altWide - altDeep;
      }
 
     int count = 0;
@@ -212,9 +213,9 @@ public class Board {
     //println statements at the beginning and end are just for aesthetics
     System.out.println();
 
-    for(int i = 0; i < altdeep + 1; i++)
+    for(int i = 0; i < altDeep + 1; i++)
     {
-      for(int j = 0; j < altwide + 1; j++)
+      for(int j = 0; j < altWide + 1; j++)
       {
         if(j == altWide)
         {

@@ -63,6 +63,7 @@ public class Main {
 
       gameSetUp();
       //testSetUp1();
+      //testSetUp2();
 
       while(!b.hasWinner())
       {
