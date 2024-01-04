@@ -52,18 +52,40 @@ public class Main {
     }
 
     public static void testSetUp2() {
-      b = new Board(5, 6);
-      b.printBoard();
+      b = new Board(9, 8);
 
       player1 = "x";
       player2 = "o";
+
+      b.placePiece(2, player1);
+      b.placePiece(3, player2);
+      b.placePiece(3, player1);
+      b.placePiece(2, player2);
+      b.placePiece(2, player1);
+      b.placePiece(3, player2);
+      b.placePiece(3, player2);
+      b.placePiece(2, player2);
+      b.placePiece(2, player2);
+      b.placePiece(2, player2);
+      b.placePiece(4, player2);
+      b.placePiece(4, player2);
+      b.placePiece(4, player2);
+      b.placePiece(4, player2);
+      b.placePiece(5, player2);
+      b.placePiece(3, player2);
+      b.placePiece(1, player2);
+      b.placePiece(5, player2);
+
+      b.printBoard();
+
+      turn = 6;
     }
 
     public static void main(String[] args) {
 
-      gameSetUp();
+      //gameSetUp();
       //testSetUp1();
-      //testSetUp2();
+      testSetUp2();
 
       while(!b.hasWinner())
       {
